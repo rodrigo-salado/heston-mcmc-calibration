@@ -1,0 +1,176 @@
+# ============================================================================
+# Heston Model Bayesian Calibration - Python Dependencies
+# ============================================================================
+# 
+# Install all dependencies:
+#   pip install -r requirements.txt
+#
+# Or install individually:
+#   pip install numpy scipy matplotlib pandas seaborn jupyter
+#
+# Minimum Python version: 3.9+
+#
+# Author: Rodrigo Antonio Salado Ferrero
+# License: MIT
+# Repository: github.com/rodrigo-salado/heston-mcmc-calibration
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# Core Numerical Computing
+# ---------------------------------------------------------------------------
+
+# NumPy: Fundamental package for scientific computing in Python.
+# Used for: Array operations, vectorised Fourier integration,
+#           random number generation for MCMC proposals,
+#           statistical calculations (mean, std, quantiles),
+#           and all matrix/vector operations throughout the calibration.
+numpy>=1.24.0,<2.0.0
+
+# SciPy: Library for scientific computing and optimisation.
+# Used for: Statistical distributions (norm for likelihood and priors),
+#           Brent's method for implied volatility root-finding,
+#           numerical integration utilities, and special functions.
+scipy>=1.10.0
+
+# ---------------------------------------------------------------------------
+# Data Manipulation and Analysis
+# ---------------------------------------------------------------------------
+
+# Pandas: Data manipulation and analysis library.
+# Used for: Organising calibration results into DataFrames,
+#           handling multi-chain MCMC output, summary statistics,
+#           and exporting results to CSV/Excel for further analysis.
+pandas>=2.0.0
+
+# ---------------------------------------------------------------------------
+# Data Visualization
+# ---------------------------------------------------------------------------
+
+# Matplotlib: Comprehensive plotting library for Python.
+# Used for: Generating all visualizations including:
+#           - Trace plots for MCMC convergence diagnostics
+#           - Marginal posterior density plots
+#           - Pair plots with correlation coefficients
+#           - Posterior predictive smile validation plots
+matplotlib>=3.7.0
+
+# Seaborn: Statistical data visualization library.
+# Used for: Enhanced pair plots with KDE on diagonals,
+#           beautiful default styling, correlation heatmaps,
+#           and joint distribution visualisations.
+seaborn>=0.12.0
+
+# ---------------------------------------------------------------------------
+# MCMC and Bayesian Inference (Optional - for comparison)
+# ---------------------------------------------------------------------------
+
+# PyMC: Probabilistic programming library with NUTS sampler.
+# Used for: Cross-validation of our custom Metropolis-Hastings
+#           implementation, automatic tuning, and gradient-based
+#           sampling for comparison studies.
+# Note: Optional dependency - not required for main calibration
+pymc>=5.0.0
+
+# ArviZ: Exploratory analysis of Bayesian models.
+# Used for: Computing R-hat convergence statistics,
+#           effective sample size (ESS) calculations,
+#           and generating diagnostic plots for PyMC results.
+arviz>=0.15.0
+
+# ---------------------------------------------------------------------------
+# Development and Testing
+# ---------------------------------------------------------------------------
+
+# pytest: Mature testing framework for Python.
+# Used for: Unit tests for all calibration components:
+#           - Heston characteristic function correctness
+#           - BS limit verification (xi -> 0)
+#           - Fourier inversion accuracy
+#           - MCMC acceptance rate validation
+#           - Prior and likelihood evaluation
+pytest>=7.4.0
+
+# pytest-cov: Coverage reporting plugin for pytest.
+# Used for: Measuring test coverage to ensure critical paths
+#           (pricing, likelihood, MCMC proposals) are fully tested.
+pytest-cov>=4.1.0
+
+# pytest-benchmark: Performance benchmarking plugin for pytest.
+# Used for: Measuring and tracking performance of critical operations:
+#           - Likelihood evaluation speed
+#           - Posterior evaluation speed
+#           - Single MCMC iteration time
+#           - Full calibration runtime
+#           - Fourier integration performance
+# Note: Optional - for performance regression testing.
+# Usage: pytest tests/ --benchmark-only
+#        pytest tests/ --benchmark-compare=previous.json
+pytest-benchmark>=4.0.0
+
+# ---------------------------------------------------------------------------
+# Code Quality Tools (Development Only)
+# ---------------------------------------------------------------------------
+
+# black: Code formatter for consistent style.
+# Used for: Automatic code formatting to maintain consistent style
+#           across the project. Run with: black src/ tests/
+black>=23.0.0
+
+# mypy: Static type checker for Python.
+# Used for: Verifying type hints throughout the codebase.
+#           Run with: mypy src/ --strict
+mypy>=1.4.0
+
+# ruff: Fast linter (replaces flake8, isort, pylint).
+# Used for: Fast linting and import sorting.
+#           Run with: ruff check src/ --fix
+ruff>=0.0.280
+
+# ---------------------------------------------------------------------------
+# Jupyter Ecosystem (For Notebook Analysis)
+# ---------------------------------------------------------------------------
+
+# Jupyter Lab: Next-generation web-based interactive development environment.
+# Used for: Interactive exploration of calibration results,
+#           live visualisation of MCMC convergence,
+#           and reproducible research notebooks.
+jupyterlab>=4.0.0
+
+# ipython: Enhanced interactive Python shell.
+# Used for: Better debugging, rich output, and interactive
+#           exploration during development.
+ipython>=8.12.0
+
+# ---------------------------------------------------------------------------
+# Notes
+# ---------------------------------------------------------------------------
+#
+# All dependencies are pure Python or have pre-compiled wheels available
+# for Windows, macOS, and Linux. No C compiler or system libraries required.
+#
+# PyMC and ArviZ are optional - the main calibration works without them.
+# Install with: pip install pymc arviz  (for comparison studies)
+#
+# pytest-benchmark is optional - performance tests are skipped if not installed.
+# To run benchmarks: pip install pytest-benchmark
+#
+# Tested with Python 3.9, 3.10, 3.11, and 3.12.
+#
+# Installation time: ~45 seconds on a typical broadband connection.
+# Disk space required: ~350 MB for all packages and dependencies.
+#
+# For minimal production installation (no dev tools, no notebooks):
+#   pip install numpy scipy matplotlib pandas seaborn
+#
+# For development (full suite):
+#   pip install -r requirements.txt
+#
+# For running benchmarks only:
+#   pip install pytest pytest-benchmark
+#   pytest tests/test_inference.py -k "benchmark" --benchmark-only
+#
+# To compare benchmark results across runs:
+#   pytest tests/test_inference.py --benchmark-autosave
+#   pytest tests/test_inference.py --benchmark-compare
+#
+# ============================================================================
